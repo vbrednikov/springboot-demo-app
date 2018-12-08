@@ -15,6 +15,7 @@ apply plugin: 'io.spring.dependency-management'
 
 bootJar {
     baseName = 'hellospring'
+    version  = '0.1.0'
     launchScript()
 }
 
