@@ -1,6 +1,18 @@
 sudo: false
 language: java
 jdk:
-  - openjdk8
+- openjdk8
 script:
-  - ./gradlew build
+- "./gradlew build"
+deploy:
+  provider: releases
+  api_key:
+    secure: DQ3EpWH3w5oN+6NxpAxtIyn6CuxpBYrNAkQ7lFqfD57OD60MXuWNDvUSs6MbGSZkiCLcG+2IjGaimoc6K4/qixe73yvjQjKaawPSdhrlKIAifyfTs3+VBtEUxQY9q9lUUSZY5gn5H1pFycGrOijWhhglKvGsvNXpsP6Yk/iefybzqgbQmI6n189F0sRx/mwWuBqlR3yghcz9Rt1EIVddVDqeDbM3sXRVwx05Idt4UGIe8zTsl3cWaHnTwcBC6Z2VMcofDT9Oe70as8jiMPgchrXrp7QiszyPxxjNTy+HFuZjtzwp99hQ11obO7j1M78yT0NOc4fOtPvxERhRE+c+F16J8j/CF53btNNXzHxkxWvOnhizv8R427orrq0y1j0UC1KEyvhJr0IPYCQG2FS5Xn4uLQJdBPeft6LY7VJijiBd6DARwFBSovgOO9YP8dIe0wEfBx77wRbXiI/QPcB7NQ8skX1tAk1lGBqe4ICgmqCCQswBhPkNsWwfD5+2pPQhb16nvtbIMcGAvrpenHuPvUFSBZqXf3WWtR82EP8TteHVnB/NbgsxK1JeXDmP9LWbiNtY5nkvBb1M9R4jlJ0fBhYONPGScbRHd+vqzAbFKw+dXqu2+mwXfpksxyNKSPC1tv1XxbHXSIWONzaypqkHCpL2n8cOIOPwWOTKIb0hY6c=
+  file_glob: true
+  file: build/libs/hellospring-*.jar
+  skip_cleanup: true
+  overwrite: true
+  on:
+    branch: master
+    repo: vbrednikov/springboot-demo-app
+    tags: true
