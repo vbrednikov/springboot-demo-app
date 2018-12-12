@@ -15,8 +15,19 @@ apply plugin: 'io.spring.dependency-management'
 
 bootJar {
     baseName = 'hellospring'
-    version  = '0.1.0'
+    version  = '0.2.0'
     launchScript()
+}
+
+springBoot {
+    buildInfo {
+        properties {
+            artifact = 'hellospring'
+            version = '0.2.0'
+            group = 'com.example'
+            name = 'hellospring'
+        }
+    }
 }
 
 repositories {
