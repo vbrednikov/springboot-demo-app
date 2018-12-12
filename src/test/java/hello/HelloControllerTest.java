@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -27,6 +28,28 @@ public class HelloControllerTest {
         mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(content().string(equalTo("Greetings from Spring Boot!")));
+    }
+
+    @Test
+    public void postPingOk() throws Exception {
+        String json="{\"content\": \"ping\"}";
+        String response_json="{\"ping\": \"pong\"}";
+        mvc.perform(MockMvcRequestBuilders.post("/ping").contentType(MediaType.APPLICATION_JSON)
+            .content(json)
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string(equalTo(response_json)));
+    }
+
+    @Test
+    public void postPingFail() throws Exception {
+        String json="{\"content\": \"pring\"}";
+        String response_json="{\"sorry\": \"pring\"}";
+        mvc.perform(MockMvcRequestBuilders.post("/ping").contentType(MediaType.APPLICATION_JSON)
+            .content(json)
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().is(400))
+            .andExpect(content().string(equalTo(response_json)));
     }
 
 }
